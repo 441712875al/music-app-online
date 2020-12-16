@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="icon_default_size">32dp</dimen>
+    <dimen name="padding_default_size">12dp</dimen>
+    <dimen name="margin_default_size">15dp</dimen>
+    <dimen name="radius_size">8dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="edit_height_size">60dp</dimen>
+    <dimen name="login_frag_height">320dp</dimen>
+    <dimen name="sign_frag_height">480dp</dimen>
+    <dimen name="avatar_size">48dp</dimen>
+    <dimen name="searchView_size">48dp</dimen>
+    <dimen name="search_icon_size">24dp</dimen>
+    <dimen name="icon_song_size">48dp</dimen>
+    <dimen name="small_icon_size">16dp</dimen>
+    <dimen name="btn_love_height_size">5dp</dimen>
+    <dimen name="btn_love_width_size">8dp</dimen>
+
+</resources>

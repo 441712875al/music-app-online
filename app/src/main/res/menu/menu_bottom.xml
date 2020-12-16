@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/homePageItem"
+        android:icon="@drawable/ic_music_home_page"
+        android:title="首页"
+        />
+
+
+    <item
+        android:id="@+id/musicHomeItem"
+        android:icon="@drawable/ic_cloud"
+        android:title="音乐馆"
+        />
+
+    <item
+        android:id="@+id/userItem"
+        android:icon="@drawable/ic_user"
+        android:title="我的"
+        />
+
+</menu>
