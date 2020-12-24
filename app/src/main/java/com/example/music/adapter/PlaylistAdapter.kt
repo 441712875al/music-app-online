@@ -15,7 +15,7 @@ class PlaylistAdapter(val playlists: ArrayList<Playlist>,val context:AppCompatAc
     inner class ViewHolder(view: View):RecyclerView.ViewHolder(view){
         val playlistCover: ImageView = view.findViewById<ImageView>(R.id.playlist_cover)
         val playlistName: TextView = view.findViewById<TextView>(R.id.playlist_name)
-        val playCount: TextView = view.findViewById<TextView>(R.id.play_count)
+        val trackCount: TextView = view.findViewById<TextView>(R.id.track_count)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,7 +27,7 @@ class PlaylistAdapter(val playlists: ArrayList<Playlist>,val context:AppCompatAc
         val playlist = playlists[position]
         holder.playlistCover.setImageBitmap(LocalFileUtil.loadImage(playlist.coverImgUrl,context))
         holder.playlistName.text = playlist.name
-        holder.playCount.text = playlist.trackCount.toString().plus("首")
+        holder.trackCount.text = playlist.trackCount.toString().plus("首")
     }
 
     override fun getItemCount() = playlists.size

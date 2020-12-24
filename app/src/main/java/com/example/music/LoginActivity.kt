@@ -115,7 +115,7 @@ class LoginActivity : AppCompatActivity() {
 
                             /*loginActivity的任务已经完成，光荣退出*/
                             startActivity(intent)
-                            activity?.finish()
+                            activity.finish()
                         }
                         400 -> {
                             editor.clear()

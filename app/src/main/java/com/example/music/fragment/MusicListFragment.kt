@@ -18,7 +18,7 @@ import com.example.music.pojo.Music
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
-class MusicListFragment(val musicList:ArrayList<Music>,resId:Int):BaseFragment(resId) {
+class MusicListFragment(val musicList:List<Music>,resId:Int):BaseFragment(resId) {
 
     override fun onCreateView(
         inflater: LayoutInflater,

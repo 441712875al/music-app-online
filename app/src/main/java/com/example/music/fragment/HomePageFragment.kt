@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,17 +13,23 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.music.MainActivity
 import com.example.music.R
 import com.example.music.adapter.PlaylistAdapter
+import com.example.music.json.PlaylistDetailResponse
 import com.example.music.json.PlaylistResponse
+import com.example.music.pojo.Music
 import com.example.music.pojo.Playlist
 import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashSet
 
 class HomePageFragment(resId:Int, val profile: Bundle?):BaseFragment(resId) {
     private lateinit var mainActivity:MainActivity
     var playlists:ArrayList<Playlist>? = null
-    var lovePlayList : Playlist? = null
+    var lovePlayListId : Long? = null
+    var loveSongs : ArrayList<Music>? = null//服务器提交修改有一定的时延，本地保存下
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,12 +41,18 @@ class HomePageFragment(resId:Int, val profile: Bundle?):BaseFragment(resId) {
         }
         val view  = super.onCreateView(inflater, container, savedInstanceState)!!
 
-        /*配置用户的基本信息*/
-        view?.run{
+
+        view.run{
+            /*配置用户的基本信息*/
             val avatarBitmap = (activity as MainActivity).bitmap
             findViewById<CircleImageView>(R.id.avatar).setImageBitmap(avatarBitmap)
             findViewById<TextView>(R.id.nickname_main).text = profile?.getString("nickname")
             findViewById<TextView>(R.id.signature).text = profile?.getString("signature")
+
+            /*其他*/
+            findViewById<ImageView>(R.id.addPlaylistBtn).setOnClickListener {
+                Toast.makeText(context,"创建歌单的功能正在建设，敬请期待！",Toast.LENGTH_SHORT).show()
+            }
         }
 
         /*加载用户的歌单*/
@@ -54,6 +67,7 @@ class HomePageFragment(resId:Int, val profile: Bundle?):BaseFragment(resId) {
         }
         return view
     }
+
 
     /**
      * 异步加载用户的歌单
@@ -81,9 +95,10 @@ class HomePageFragment(resId:Int, val profile: Bundle?):BaseFragment(resId) {
 
                     /*保存下值，下次就不用请求了*/
                     if(playlistArray.size>0){
-                        lovePlayList  = playlistArray[0]
+                        lovePlayListId  = playlistArray[0].id
                         playlistArray.removeAt(0)
                         playlists = playlistArray
+                        getLoveSongs()
                     }
 
                 }else{
@@ -97,4 +112,38 @@ class HomePageFragment(resId:Int, val profile: Bundle?):BaseFragment(resId) {
 
         })
     }
+
+    private fun getLoveSongs(){
+
+        mainActivity.musicHttpService.getPlaylistDetail(lovePlayListId.toString()).enqueue(object : Callback<PlaylistDetailResponse>{
+            override fun onResponse(
+                call: Call<PlaylistDetailResponse>,
+                response: Response<PlaylistDetailResponse>
+            ) {
+                val playlistDetailResponse = response.body()!!
+                val musicSet = ArrayList<Music>()
+                for(obj in playlistDetailResponse.playlist.tracks){
+                    val id = obj.id
+                    val name = obj.name
+                    val authorList = obj.ar
+                    var authors = ""
+                    for(i in 0 until authorList.size){
+                        authors +=authorList[i].name
+                        if(i!=authorList.size-1){
+                            authors +="/"
+                        }
+                    }
+                    musicSet.add(Music(id,name,authors,obj.al.picUrl))
+                }
+
+                loveSongs = musicSet//第一次点击是向网络获取，以后直接在loveSongs中进行增删改差
+            }
+
+            override fun onFailure(call: Call<PlaylistDetailResponse>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
+    }
+
 }

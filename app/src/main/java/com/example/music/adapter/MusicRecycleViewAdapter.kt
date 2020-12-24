@@ -24,7 +24,7 @@ class MusicRecycleViewAdapter(val musicList:List<Music>):RecyclerView.Adapter<Mu
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val music = musicList[position]
-        holder.musicNum.text = music.rank.toString()
+        holder.musicNum.text = "${position+1}"
         holder.nameTxt.text = music.name
         holder.singerTxt.text = music.author
 

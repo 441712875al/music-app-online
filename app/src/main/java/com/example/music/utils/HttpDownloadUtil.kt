@@ -43,6 +43,6 @@ object HttpDownloadUtil {
     fun getFilenameFromURL(urlStr:String?) = if (urlStr == null) {
         ""
     }else{
-        urlStr?.split("/").last()
+        urlStr.split("/").last()
     }
 }

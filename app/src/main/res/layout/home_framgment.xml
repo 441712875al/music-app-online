@@ -152,7 +152,7 @@
                     android:text="我创建的歌单" />
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/addPlaylistBtn"
                     android:layout_width="@dimen/small_icon_size"
                     android:layout_height="@dimen/small_icon_size"
                     android:layout_alignParentEnd="true"

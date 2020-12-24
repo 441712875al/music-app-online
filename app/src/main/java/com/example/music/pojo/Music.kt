@@ -16,4 +16,4 @@ import java.net.URL
  * @param resName 音乐资源文件名称
  */
 @Parcelize
-data class Music(val rank:Int,val musicId:Long,val name:String, val author:String, val imageURL: String?):Parcelable
+data class Music(val musicId:Long, val name:String, val author:String, val imageURL: String?):Parcelable

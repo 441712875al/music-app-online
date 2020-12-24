@@ -18,5 +18,7 @@
     <dimen name="btn_love_height_size">5dp</dimen>
     <dimen name="btn_love_width_size">8dp</dimen>
     <dimen name="playlist_size">64dp</dimen>
+    <dimen name="recom_playlist_size">96dp</dimen>
+    <dimen name="playlist_radius_size">5dip</dimen>
 
 </resources>

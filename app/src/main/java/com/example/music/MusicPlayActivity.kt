@@ -1,5 +1,6 @@
 package com.example.music
 
+import android.app.Activity
 import android.content.*
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -10,28 +11,39 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.SeekBar
 import android.widget.Toast
 import com.example.music.broadcasts.MusicSwitchBroacast
+import com.example.music.json.LoveResponse
 import com.example.music.pojo.Music
+import com.example.music.services.MusicHttpService
 import com.example.music.services.MusicService
 import com.example.music.utils.HttpDownloadUtil
 import com.example.music.utils.LocalFileUtil
+import com.example.music.utils.ServiceCreator
 import kotlinx.android.synthetic.main.activity_music_play.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.FileInputStream
 
 class MusicPlayActivity : AppCompatActivity() {
 
-    private var musicIx:Int = 0
+    private var musicIx:Int = 0//当前播放的音乐的索引
 
     var musicPlayBinder: MusicService.MusicPlayBinder? = null
 
     lateinit var myBroadcastReceiver : MusicSwitchBroacast
 
+    lateinit var musicHttpService:MusicHttpService
+
     private val activity = this
 
     val updateProgress = 0x123
 
-    var curThread:Thread? = null
+    var curThread:Thread? = null//歌曲播放线程
 
-    var musicList = ArrayList<Music>()
+    var musicList = ArrayList<Music>()//主活动传来的待播放的歌曲
+
+    var loveSongs = ArrayList<Music>()//记录收藏的歌曲
+
 
 
     /**
@@ -89,12 +101,17 @@ class MusicPlayActivity : AppCompatActivity() {
 
     }
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_music_play)
         supportActionBar?.hide()
+        musicHttpService = ServiceCreator.create(MusicHttpService::class.java,this)
+
         musicIx = intent.getIntExtra("musicIx",0)
         musicList = intent.getParcelableArrayListExtra<Music>("musicList")!!
+        loveSongs = intent.getParcelableArrayListExtra<Music>("loveSongs")!!
 
         /*开启并绑定服务，在服务连接后加载音乐*/
         val serviceIntent = Intent(this, MusicService::class.java)
@@ -108,11 +125,6 @@ class MusicPlayActivity : AppCompatActivity() {
         configBroadcastReceiver()
     }
 
-//    override fun onBackPressed() {
-//        super.onBackPressed()
-//        intent = Intent(this,MainActivity::class.java)
-//        startActivity(intent)
-//    }
 
     /**
      * 加载页面的音乐文件布局内容和音乐资源
@@ -132,6 +144,8 @@ class MusicPlayActivity : AppCompatActivity() {
         /*开始准备播放*/
         musicPlayBinder?.preparePlay()
     }
+
+
 
     /**
      * 实时向主线程发送刷新歌曲播放进度条的消息，从而更新UI
@@ -207,6 +221,7 @@ class MusicPlayActivity : AppCompatActivity() {
         }
     }
 
+
     /**
      * 注册广播,监听通知栏中的点击事件
      */
@@ -236,8 +251,34 @@ class MusicPlayActivity : AppCompatActivity() {
             }
 
             R.id.loveItem ->{
-                showMessage("已加入喜欢")
+                val music = musicList[musicIx]
+                if(loveSongs.contains(music)){
+                    loveSongs.remove(music)
+                    showMessage("已取消喜欢")
+                }else{
+                    musicHttpService.love(music.musicId.toString(),true).enqueue(object :
+                        Callback<LoveResponse> {
+                        override fun onFailure(call: Call<LoveResponse>, t: Throwable) {
+                            t.printStackTrace()
+                        }
+
+                        override fun onResponse(
+                            call: Call<LoveResponse>,
+                            response: Response<LoveResponse>
+                        ) {
+                            val loveResponse = response.body()!!
+                            if(loveResponse.code==200){
+                                loveSongs.add(0,music)
+                                showMessage("已加入喜欢")
+                            }else{
+                                showMessage(loveResponse.msg)
+                            }
+                        }
+                    })
+                }
+
             }
+
 
             R.id.downloadItem ->{
                 showMessage("版权原因，歌曲不允许下载")
@@ -263,5 +304,13 @@ class MusicPlayActivity : AppCompatActivity() {
      */
     private fun showMessage(msg:String){
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onBackPressed() {
+        /*将收藏的歌曲返回给主活动*/
+        val intent = Intent()
+        intent.putParcelableArrayListExtra("loveSongs",ArrayList(loveSongs))
+        setResult(RESULT_OK,intent)
+        finish()
     }
 }

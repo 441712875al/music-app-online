@@ -9,10 +9,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.music.MainActivity
 import com.example.music.R
 import com.example.music.adapter.ImageAdapter
 import com.example.music.adapter.PlaylistAdapter
+import com.example.music.adapter.RecomPlaylistAdapter
 import com.example.music.json.RecomPlaylistResponse
 import com.example.music.pojo.Playlist
 import com.youth.banner.Banner
@@ -23,7 +25,7 @@ import retrofit2.Response
 
 class MusicHomeFragment:Fragment() {
     private lateinit var  mainActivity:MainActivity
-    var playlists:ArrayList<Playlist>? = null
+    var recomPlaylists:List<Playlist>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,17 +42,18 @@ class MusicHomeFragment:Fragment() {
             .addBannerLifecycleObserver(this)
             .setIndicator(CircleIndicator(context))
 
-        if(playlists==null){
+        if(recomPlaylists==null){
             loadPlaylist(view)
         }else{
             val recomSheetListView = view.findViewById<RecyclerView>(R.id.recom_playlist_view)
-            val adapter = PlaylistAdapter(playlists!!,mainActivity)
+            val adapter = RecomPlaylistAdapter(recomPlaylists!!,mainActivity)
             recomSheetListView.adapter  = adapter
-            recomSheetListView.layoutManager = LinearLayoutManager(mainActivity)
+            recomSheetListView.layoutManager = StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL)
             adapter.notifyDataSetChanged()
         }
         return view
     }
+
 
     /**
      * 初始化banner需要的图片
@@ -63,6 +66,7 @@ class MusicHomeFragment:Fragment() {
         }
         return imageList
     }
+
 
     /**
      * 异步加载推荐的歌单
@@ -84,13 +88,13 @@ class MusicHomeFragment:Fragment() {
                     }
 
                     val recomSheetListView = view.findViewById<RecyclerView>(R.id.recom_playlist_view)
-                    val adapter = PlaylistAdapter(playlistArray,mainActivity)
+                    val adapter = RecomPlaylistAdapter(playlistArray,mainActivity)
                     recomSheetListView.adapter  = adapter
-                    recomSheetListView.layoutManager = LinearLayoutManager(mainActivity)
+                    recomSheetListView.layoutManager = StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL)
                     adapter.notifyDataSetChanged()
 
                     /*保存下值，下次就不用请求了*/
-                    playlists = playlistArray
+                    recomPlaylists = playlistArray
                 }else{
                     Toast.makeText(mainActivity,"请求失败", Toast.LENGTH_LONG).show()
                 }

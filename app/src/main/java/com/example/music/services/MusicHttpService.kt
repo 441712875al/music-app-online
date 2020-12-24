@@ -26,7 +26,7 @@ interface MusicHttpService {
     fun getLyric(@Query("id")id:String): Call<LyricResponse>
 
     /**
-     * 获取歌曲信息
+     * 获取推荐歌曲信息
      */
     @GET("recommend/songs")
     fun getRecommendSongs():Call<DailyRecomSongsResponse>
@@ -43,6 +43,16 @@ interface MusicHttpService {
     @GET("playlist/detail")
     fun getPlaylistDetail(@Query("id")id:String):Call<PlaylistDetailResponse>
 
+    /**
+     * 获取推荐歌单
+     */
     @GET("personalized")
     fun getRecomPlaylist(@Query("limit")limit:Int):Call<RecomPlaylistResponse>
+
+
+    /**
+     * 将歌曲加入喜欢，或者是取消
+     */
+    @GET("like")
+    fun love(@Query("id")id:String,@Query("like")like:Boolean):Call<LoveResponse>
 }

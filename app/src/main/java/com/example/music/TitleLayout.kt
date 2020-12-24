@@ -15,7 +15,7 @@ class TitleLayout(context:Context,attrs:AttributeSet):ConstraintLayout(context,a
         val view = LayoutInflater.from(context).inflate(R.layout.title,this)
         view.findViewById<CircleImageView>(R.id.menu).setOnClickListener {
             val mainActivity = context as MainActivity
-            mainActivity?.findViewById<DrawerLayout>(R.id.drawerLayout)?.openDrawer(GravityCompat.START)
+            mainActivity.findViewById<DrawerLayout>(R.id.drawerLayout)?.openDrawer(GravityCompat.START)
         }
     }
 }
