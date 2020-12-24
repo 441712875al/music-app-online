@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="MissingDefaultResource">
+
+    <ImageView
+        android:id="@+id/notifyCover"
+        android:layout_width="93dp"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:id="@+id/notifyMusicName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="One Day"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/notifyMusicAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enbam3 - nothing"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+
+            <LinearLayout
+                android:id="@+id/notifyPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                >
+
+                <ImageView
+                    android:id="@+id/notifyStart"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/start" />
+
+                <ImageView
+                    android:id="@+id/notifyStop"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/stop"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/notifyPrecious"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@id/notifyPlay"
+                android:layout_centerVertical="true"
+                android:src="@drawable/previous" />
+
+            <ImageView
+                android:id="@+id/notifyNext"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/next"
+                android:layout_toRightOf="@id/notifyPlay"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

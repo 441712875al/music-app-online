@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/icon_default_size"
         android:paddingLeft="32dp"
-        android:background="@drawable/search_shape">
+        android:background="@drawable/shape_search">
     </EditText>
 
     <ImageView

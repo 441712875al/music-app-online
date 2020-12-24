@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">music</string>
+    <string name="app_name">音乐</string>
     <string name="navigation_theme_item">个性装扮</string>
     <string name="close_in_time_item">定时关闭</string>
     <string name="help_item">帮助与反馈</string>

@@ -45,7 +45,7 @@
         android:id="@+id/loginItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/selected_shape"
+        android:background="@drawable/shape_selected"
         android:paddingLeft="@dimen/margin_default_size"
         android:paddingTop="10dp"
         android:paddingRight="@dimen/margin_default_size"

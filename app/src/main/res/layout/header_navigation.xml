@@ -26,12 +26,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/avatar"
-        app:layout_constraintTop_toBottomOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/phone"
         app:layout_constraintVertical_bias="0.011"
         app:srcCompat="@drawable/edit" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/signature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="编辑个签，展示我的独特态度"
@@ -39,11 +39,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/phone"
         app:layout_constraintVertical_bias="0.011" />
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="魔道祖师~"

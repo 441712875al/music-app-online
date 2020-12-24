@@ -11,6 +11,7 @@ import com.youth.banner.adapter.BannerAdapter;
 import java.util.List;
 
 /**
+ * 用来加载banner
  * 自定义布局，下面是常见的图片样式，更多实现可以看demo，可以自己随意发挥
  */
 public class ImageAdapter extends BannerAdapter<Integer, ImageAdapter.BannerViewHolder> {

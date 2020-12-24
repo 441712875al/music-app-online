@@ -6,7 +6,7 @@
     android:padding="@dimen/padding_default_size">
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/phone"
         android:layout_width="match_parent"
         android:layout_height="@dimen/edit_height_size"
         android:autofillHints=" "
@@ -29,7 +29,7 @@
         android:theme="@style/EditTextTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/phone"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
@@ -40,14 +40,14 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.385"
+        app:layout_constraintVertical_bias="0.33999997"
         app:srcCompat="@drawable/lock" />
 
     <ImageView
         android:layout_width="@dimen/icon_default_size"
         android:layout_height="@dimen/icon_default_size"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/username"
+        app:layout_constraintEnd_toEndOf="@+id/phone"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -66,5 +66,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.9" />
+
+    <CheckBox
+        android:id="@+id/remember_me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="记住我"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pwd"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

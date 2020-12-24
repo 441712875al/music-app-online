@@ -33,7 +33,7 @@
             android:background="@drawable/shape_default">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/circleImageView"
+                android:id="@+id/avatar"
                 android:layout_width="@dimen/avatar_size"
                 android:layout_height="@dimen/avatar_size"
                 android:src="@drawable/avatar"
@@ -49,7 +49,7 @@
                 android:textColor="@color/design_default_color_on_secondary"
                 android:textColorHighlight="#000000"
                 android:textSize="16sp"
-                android:layout_toRightOf="@id/circleImageView"/>
+                android:layout_toRightOf="@id/avatar"/>
 
             <ImageView
                 android:id="@+id/arrow_right"
@@ -60,7 +60,7 @@
                 android:layout_alignParentEnd="true"/>
 
             <TextView
-                android:id="@+id/attitude"
+                android:id="@+id/signature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_normal"
@@ -68,18 +68,19 @@
                 android:textColor="@color/design_default_color_background"
                 android:textSize="10sp"
                 android:layout_below="@id/nickname_main"
-                android:layout_toRightOf="@id/circleImageView"
+                android:layout_toRightOf="@id/avatar"
                 />
         </RelativeLayout>
 
 
         <RelativeLayout
-            android:id="@+id/love_relativeLayout"
+            android:id="@+id/loveListLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_default_size"
             android:background="@drawable/shape_default"
             android:orientation="horizontal"
+            android:onClick="onClick"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -88,7 +89,7 @@
             app:layout_constraintVertical_bias="0.135">
 
             <ImageView
-                android:id="@+id/myloveList"
+                android:id="@+id/mylove"
                 android:layout_width="@dimen/icon_song_size"
                 android:layout_height="@dimen/icon_song_size"
                 android:src="@drawable/icon_love_red" />
@@ -97,7 +98,7 @@
                 android:id="@+id/start_play_love"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_btn"
+                android:background="@drawable/shape_icon_bottun"
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true">
                 <ImageView
@@ -116,7 +117,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/myloveList"
+                android:layout_toRightOf="@+id/mylove"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="8dp"
                 android:text="我喜欢的音乐" />
@@ -136,13 +137,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/love_relativeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/loveListLayout"
             app:layout_constraintVertical_bias="0.0">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/margin_default_size">
 
                 <TextView
                     android:layout_width="wrap_content"
