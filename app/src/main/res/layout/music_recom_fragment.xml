@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_default_size"
         >
-        <com.example.music.TitleLayout
+        <com.example.music.layout.TitleLayout
             android:id="@+id/titleLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,6 +56,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textColor="?attr/colorSurface"
                     android:text="每日推荐" />
 
             </LinearLayout>
@@ -79,6 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textColor="?attr/colorSurface"
                     android:text="排行榜" />
 
             </LinearLayout>
@@ -102,6 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textColor="?attr/colorSurface"
                     android:text="歌单" />
 
             </LinearLayout>
@@ -131,7 +134,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerInParent="true"
                     android:text="推荐歌单"
-                    android:textColor="@color/design_default_color_on_secondary"
+                    android:textColor="?attr/colorSurface"
                     android:textSize="18sp" />
 
                 <TextView
@@ -139,6 +142,7 @@
                     android:layout_height="wrap_content"
                     android:text="更多"
                     android:background="@drawable/shape_icon_bottun"
+                    android:textColor="?attr/colorSurface"
                     android:layout_centerInParent="true"
                     android:layout_alignParentEnd="true"/>
             </RelativeLayout>

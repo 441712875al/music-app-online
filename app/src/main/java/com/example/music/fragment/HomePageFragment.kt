@@ -1,149 +1,109 @@
 package com.example.music.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.music.MainActivity
+import com.example.music.AppDatabase
+import com.example.music.activity.MainActivity
 import com.example.music.R
 import com.example.music.adapter.PlaylistAdapter
-import com.example.music.json.PlaylistDetailResponse
-import com.example.music.json.PlaylistResponse
-import com.example.music.pojo.Music
-import com.example.music.pojo.Playlist
-import de.hdodenhof.circleimageview.CircleImageView
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashSet
+import com.example.music.viewmodel.HomePageViewModel
+import kotlinx.android.synthetic.main.home_framgment.view.*
+import kotlin.concurrent.thread
 
-class HomePageFragment(resId:Int, val profile: Bundle?):BaseFragment(resId) {
-    private lateinit var mainActivity:MainActivity
-    var playlists:ArrayList<Playlist>? = null
-    var lovePlayListId : Long? = null
-    var loveSongs : ArrayList<Music>? = null//服务器提交修改有一定的时延，本地保存下
+class HomePageFragment(resId:Int):BaseFragment(resId) {
+    private val TAG = "HomePage"
+    private lateinit var mainActivity: MainActivity
+    lateinit var viewModel:HomePageViewModel
+    lateinit var thisView:View
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.e(TAG,"OnCreateView")
+
         if(activity!=null){
             mainActivity = activity as MainActivity
         }
-        val view  = super.onCreateView(inflater, container, savedInstanceState)!!
 
+        thisView =  inflater.inflate(resId, container, false)
 
-        view.run{
-            /*配置用户的基本信息*/
-            val avatarBitmap = (activity as MainActivity).bitmap
-            findViewById<CircleImageView>(R.id.avatar).setImageBitmap(avatarBitmap)
-            findViewById<TextView>(R.id.nickname_main).text = profile?.getString("nickname")
-            findViewById<TextView>(R.id.signature).text = profile?.getString("signature")
-
-            /*其他*/
-            findViewById<ImageView>(R.id.addPlaylistBtn).setOnClickListener {
-                Toast.makeText(context,"创建歌单的功能正在建设，敬请期待！",Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        /*加载用户的歌单*/
-        if(playlists==null){
-            loadPlaylist(view)
-        }else{
-            val sheetListView = view.findViewById<RecyclerView>(R.id.sheetListView)
-            val adapter = PlaylistAdapter(playlists!!,mainActivity)
+        viewModel = ViewModelProvider(this)[HomePageViewModel::class.java]
+        loadPlaylist()
+        loadUserInfo()
+        viewModel.playlists.observe(viewLifecycleOwner, { list ->
+            /*加载用户的歌单*/
+            val sheetListView = thisView.findViewById<RecyclerView>(R.id.sheetListView)
+            val adapter = PlaylistAdapter(list,mainActivity)
             sheetListView.adapter  = adapter
             sheetListView.layoutManager = LinearLayoutManager(mainActivity)
             adapter.notifyDataSetChanged()
+        })
+
+        viewModel.avatarBitmap.observe(viewLifecycleOwner,{
+            thisView.avatar.setImageBitmap(it)
+        })
+
+        viewModel.nickname.observe(viewLifecycleOwner,{
+            thisView.nickname_main.text = it
+        })
+
+
+        viewModel.signature.observe(viewLifecycleOwner,{
+            thisView.signature.text = it
+        })
+        return thisView
+    }
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.e(TAG,"OnAttach")
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        Log.e(TAG,"OnActivityCreated")
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.e(TAG,"OnDestroyView")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.e(TAG,"OnDetach")
+    }
+    /**
+     * 数据库获取用户的歌单
+     */
+    private fun loadPlaylist(){
+        val playlistDao = AppDatabase.getDatabase(context!!).playlistDao()
+        thread{
+            viewModel.playlists.postValue(playlistDao.loadAll())
         }
-        return view
     }
 
 
     /**
-     * 异步加载用户的歌单
+     * 加载用户的信息数据
      */
-    private fun loadPlaylist(view:View){
-        Log.e("Main","你好")
-        mainActivity.musicHttpService.getPlaylist(mainActivity.uid).enqueue(object : Callback<PlaylistResponse>{
-            override fun onResponse(
-                call: Call<PlaylistResponse>,
-                response: Response<PlaylistResponse>
-            ) {
-                val playlistArray = ArrayList<Playlist>()
-                val result = response.body()!!
-                if(result.code==200){
-                    var playlist = result.playlist!!
-                    for(obj in playlist){
-                        playlistArray.add(Playlist(obj.id,obj.name,obj.coverImgUrl,obj.trackCount,obj.playCount))
-                    }
-
-                    val sheetListView = view.findViewById<RecyclerView>(R.id.sheetListView)
-                    val adapter = PlaylistAdapter(playlistArray,mainActivity)
-                    sheetListView.adapter  = adapter
-                    sheetListView.layoutManager = LinearLayoutManager(mainActivity)
-                    adapter.notifyDataSetChanged()
-
-                    /*保存下值，下次就不用请求了*/
-                    if(playlistArray.size>0){
-                        lovePlayListId  = playlistArray[0].id
-                        playlistArray.removeAt(0)
-                        playlists = playlistArray
-                        getLoveSongs()
-                    }
-
-                }else{
-                    Toast.makeText(mainActivity,"请求失败",Toast.LENGTH_LONG).show()
-                }
-            }
-
-            override fun onFailure(call: Call<PlaylistResponse>, t: Throwable) {
-                t.printStackTrace()
-            }
-
-        })
+    private fun loadUserInfo(){
+        viewModel.avatarBitmap.value = mainActivity.userBitmap
+        thread {
+            val user = AppDatabase.getDatabase(context!!).userDao().getUser()?.get(0)
+            viewModel.nickname.postValue(user.nickname)
+            viewModel.signature.postValue(user.signature)
+        }
     }
-
-    private fun getLoveSongs(){
-
-        mainActivity.musicHttpService.getPlaylistDetail(lovePlayListId.toString()).enqueue(object : Callback<PlaylistDetailResponse>{
-            override fun onResponse(
-                call: Call<PlaylistDetailResponse>,
-                response: Response<PlaylistDetailResponse>
-            ) {
-                val playlistDetailResponse = response.body()!!
-                val musicSet = ArrayList<Music>()
-                for(obj in playlistDetailResponse.playlist.tracks){
-                    val id = obj.id
-                    val name = obj.name
-                    val authorList = obj.ar
-                    var authors = ""
-                    for(i in 0 until authorList.size){
-                        authors +=authorList[i].name
-                        if(i!=authorList.size-1){
-                            authors +="/"
-                        }
-                    }
-                    musicSet.add(Music(id,name,authors,obj.al.picUrl))
-                }
-
-                loveSongs = musicSet//第一次点击是向网络获取，以后直接在loveSongs中进行增删改差
-            }
-
-            override fun onFailure(call: Call<PlaylistDetailResponse>, t: Throwable) {
-                t.printStackTrace()
-            }
-
-        })
-    }
-
 }

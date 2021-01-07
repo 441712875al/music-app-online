@@ -8,22 +8,20 @@ import android.media.MediaPlayer
 import android.os.Binder
 import android.os.Build
 import android.os.IBinder
-import android.os.Message
-import android.os.SystemClock.sleep
 import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
-import com.example.music.MainActivity
-import com.example.music.pojo.Music
-import com.example.music.MusicPlayActivity
+import com.example.music.activity.MainActivity
+import com.example.music.entity.Music
+import com.example.music.activity.MusicPlayActivity
 import com.example.music.R
-import com.example.music.broadcasts.MusicSwitchBroacast
-import com.example.music.json.LyricResponse
-import com.example.music.json.MusicUrlReponse
-import com.example.music.pojo.LrcInfo
+import com.example.music.broadcast.MusicSwitchBroacast
+import com.example.music.network.json.LyricResponse
+import com.example.music.network.json.MusicUrlReponse
+import com.example.music.entity.LrcInfo
+import com.example.music.network.service.MusicHttpService
 import com.example.music.utils.LocalFileUtil
 import com.example.music.utils.LrcParser
-import com.example.music.utils.ServiceCreator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -162,9 +160,6 @@ class MusicService : Service() {
                     mediaPlayer.stop()
                 }
                 activity.curThread?.interrupt()
-                if(activity.curThread==null){
-                    Log.e("Service","线程为null")
-                }
             }catch (e: Exception){
                 //什么也不做
                 e.printStackTrace()

@@ -9,4 +9,6 @@
     <color name="colorHint">#626675</color>
     <color name="colorLine">#D1D1D1</color>
     <color name="colorItem">#FFF1F1</color>
+    <color name="colorDark">#000000</color>
+    <color name="colorLight">#ffffff</color>
 </resources>

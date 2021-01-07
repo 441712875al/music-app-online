@@ -1,12 +1,27 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="LightTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorBackgroundPrimary</item>
+        <item name="colorButtonNormal">@color/colorBackgroundPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorOnBackground">@color/cardview_light_background</item>
 <!--        非沉浸式，黑色字体状态栏-->
         <item name="android:windowLightStatusBar">true</item>
+        <item name="colorSurface">@color/colorDark</item>
+    </style>
+
+    <style name="DarkThem" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorDark</item>
+        <item name="colorButtonNormal">@color/colorBackgroundPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorOnBackground">@color/cardview_dark_background</item>
+        <!--        非沉浸式，黑色字体状态栏-->
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="colorSurface">@color/colorLight</item>
     </style>
 
     <style name="LoginTheme" parent="Theme.AppCompat.Light.DarkActionBar">

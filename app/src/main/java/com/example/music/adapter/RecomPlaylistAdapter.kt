@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.music.R
-import com.example.music.pojo.Playlist
+import com.example.music.entity.Playlist
 import com.example.music.utils.LocalFileUtil
 import com.makeramen.roundedimageview.RoundedImageView
 

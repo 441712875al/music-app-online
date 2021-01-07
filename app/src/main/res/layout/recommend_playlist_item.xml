@@ -19,14 +19,14 @@
         android:id="@+id/play_count"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/design_default_color_on_secondary"
+        android:textColor="?attr/colorSurface"
         android:textSize="12sp" />
 
     <TextView
         android:id="@+id/playlist_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/design_default_color_on_secondary"
+        android:textColor="?attr/colorSurface"
         android:lines="1"
         android:ellipsize="end"
         android:textSize="12sp" />

@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="季仙逸"
-                android:textColor="@color/design_default_color_on_secondary"
+                android:textColor="?attr/colorSurface"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -74,13 +74,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.38" />
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_default_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.0"
+        android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -94,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:text="基本信息"
                     android:layout_marginBottom="@dimen/margin_default_size"
-                    android:textColor="@color/design_default_color_on_secondary"
+                    android:textColor="?attr/colorSurface"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -104,6 +105,7 @@
                     app:layout_constraintVertical_bias="0.01999998" />
 
             <ScrollView
+                android:id="@+id/introduction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_default_size"
@@ -116,7 +118,6 @@
                     android:id="@+id/info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="nihao"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -124,5 +125,13 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+        <Button
+            android:id="@+id/changeInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default_size"
+            android:background="@drawable/shape_button"
+            android:text="编辑"
+            android:textColor="@color/cardview_light_background" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

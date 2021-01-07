@@ -6,10 +6,11 @@
     <EditText
         android:id="@+id/searchView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/icon_default_size"
-        android:paddingLeft="32dp"
-        android:background="@drawable/shape_search">
-    </EditText>
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_search"
+        android:paddingLeft="48dp"
+        android:maxLines="1"
+        android:textSize="12sp"></EditText>
 
     <ImageView
         android:layout_width="@dimen/search_icon_size"

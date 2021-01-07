@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.music.R
-import com.example.music.pojo.Music
+import com.example.music.entity.Music
 
 class MusicRecycleViewAdapter(val musicList:List<Music>):RecyclerView.Adapter<MusicRecycleViewAdapter.ViewHolder>() {
 

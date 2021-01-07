@@ -8,7 +8,7 @@
         android:right="@dimen/padding_default_size"
         android:top="@dimen/padding_default_size" />
 
-    <solid  android:color="@color/cardview_light_background" />
+    <solid  android:color="?attr/colorOnBackground" />
     <corners android:radius="15dip" />
 
 </shape>

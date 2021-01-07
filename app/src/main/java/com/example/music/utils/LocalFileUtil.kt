@@ -30,7 +30,7 @@ object LocalFileUtil {
      */
     fun loadImage(imageURL:String?,activity: AppCompatActivity): Bitmap? {
         if(imageURL == null){
-            return null
+            return BitmapFactory.decodeResource(activity.resources,R.drawable.default_back)
         }
         val imageName = HttpDownloadUtil.getFilenameFromURL(imageURL)
         /*本地文件不存在的话就下载*/

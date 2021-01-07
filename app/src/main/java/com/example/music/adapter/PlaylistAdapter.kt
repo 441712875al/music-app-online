@@ -8,10 +8,10 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.music.R
-import com.example.music.pojo.Playlist
+import com.example.music.entity.Playlist
 import com.example.music.utils.LocalFileUtil
 
-class PlaylistAdapter(val playlists: ArrayList<Playlist>,val context:AppCompatActivity):RecyclerView.Adapter<PlaylistAdapter.ViewHolder>() {
+class PlaylistAdapter(private val playlists: List<Playlist>, val context:AppCompatActivity):RecyclerView.Adapter<PlaylistAdapter.ViewHolder>() {
     inner class ViewHolder(view: View):RecyclerView.ViewHolder(view){
         val playlistCover: ImageView = view.findViewById<ImageView>(R.id.playlist_cover)
         val playlistName: TextView = view.findViewById<TextView>(R.id.playlist_name)

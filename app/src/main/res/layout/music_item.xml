@@ -24,6 +24,7 @@
             android:layout_centerInParent="true"
             android:layout_alignParentStart="true"
             android:text="1"
+            android:textColor="?attr/colorSurface"
             android:textSize="18sp" />
     </RelativeLayout>
 
@@ -40,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="musicName"
-            android:textColor="@color/design_default_color_on_secondary"
+            android:textColor="?attr/colorSurface"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/music_author"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,6 +53,7 @@
             android:layout_height="wrap_content"
             android:text="singer"
             android:textSize="12sp"
+            android:textColor="?attr/colorSurface"
             app:layout_constraintTop_toTopOf="parent" />
 
 

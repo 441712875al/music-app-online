@@ -2,7 +2,7 @@ package com.example.music.utils;
 
 import android.util.Log;
 
-import com.example.music.pojo.LrcInfo;
+import com.example.music.entity.LrcInfo;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,7 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -54,7 +53,11 @@ public class LrcParser {
 
     public LrcInfo parse(String lyricText) throws  Exception{
         maps.clear();
-        asList(lyricText.split("\n")).forEach(e->parserLine(e));
+        try{
+            asList(lyricText.split("\n")).forEach(e->parserLine(e));
+        }catch (NullPointerException e){
+            //纯音乐，没有歌词，忽略异常
+        }
         //全部解析完后，设置info
         lrcinfo.setInfos(maps);
         return lrcinfo;

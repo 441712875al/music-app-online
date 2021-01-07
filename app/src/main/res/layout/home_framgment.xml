@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_default_size"
         >
-        <com.example.music.TitleLayout
+        <com.example.music.layout.TitleLayout
             android:id="@+id/titleLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,11 +45,10 @@
                 android:id="@+id/nickname_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="季仙逸"
-                android:textColor="@color/design_default_color_on_secondary"
+                android:layout_toRightOf="@id/avatar"
+                android:textColor="?attr/colorSurface"
                 android:textColorHighlight="#000000"
-                android:textSize="16sp"
-                android:layout_toRightOf="@id/avatar"/>
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/arrow_right"
@@ -64,7 +63,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_normal"
-                android:text="我的逆态度"
                 android:textColor="@color/design_default_color_background"
                 android:textSize="10sp"
                 android:layout_below="@id/nickname_main"
@@ -110,6 +108,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorSurface"
                     android:text="开始播放"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -120,6 +119,7 @@
                 android:layout_toRightOf="@+id/mylove"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="8dp"
+                android:textColor="?attr/colorSurface"
                 android:text="我喜欢的音乐" />
 
 
@@ -149,6 +149,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorSurface"
                     android:text="我创建的歌单" />
 
                 <ImageView

@@ -12,32 +12,33 @@
         android:icon="@mipmap/music_app_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/music_app_icon"
-        android:usesCleartextTraffic="true"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".activity.ProfileFormActivity"
+            android:theme="@style/LightTheme"></activity>
+
         <service
             android:name=".services.MusicService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.LoginActivity"
             android:exported="true"
             android:theme="@style/LoginTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".MusicPlayActivity"
-            android:theme="@style/AppTheme" />
-
+            android:name=".activity.MusicPlayActivity"
+            android:theme="@style/LightTheme" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:launchMode="singleTask"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/LightTheme"></activity>
     </application>
 
 </manifest>

@@ -45,6 +45,4 @@ public class ImageAdapter extends BannerAdapter<Integer, ImageAdapter.BannerView
             this.imageView = view;
         }
     }
-
-
 }

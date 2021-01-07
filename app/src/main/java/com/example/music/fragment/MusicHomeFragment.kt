@@ -7,16 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.music.MainActivity
+import com.example.music.activity.MainActivity
 import com.example.music.R
 import com.example.music.adapter.ImageAdapter
-import com.example.music.adapter.PlaylistAdapter
 import com.example.music.adapter.RecomPlaylistAdapter
-import com.example.music.json.RecomPlaylistResponse
-import com.example.music.pojo.Playlist
+import com.example.music.network.json.RecomPlaylistResponse
+import com.example.music.entity.Playlist
 import com.youth.banner.Banner
 import com.youth.banner.indicator.CircleIndicator
 import retrofit2.Call
@@ -24,7 +22,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MusicHomeFragment:Fragment() {
-    private lateinit var  mainActivity:MainActivity
+    private lateinit var  mainActivity: MainActivity
     var recomPlaylists:List<Playlist>? = null
 
     override fun onCreateView(
